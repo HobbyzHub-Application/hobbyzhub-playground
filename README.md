@@ -1,7 +1,14 @@
-# Vue 3 + Vite
+# HobbyzHub Frontend Placeholder
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## DETAILS
+- Author: Bikathi Martin
+- Language: JavaScript, HTML, CSS
+- Frameworks: VueJS, Vuetify, TailwindCSS
+- License: None[Temporarily]
 
-## Recommended IDE Setup
+## PREFACE
+This is a 'simple' Vue3-based web frontend whose main purpose is to help with the population of the HobbyHub database with data crucial for testing the functionality of the application as well as eliminate the need of REST clients like Postman or Insomnia in some cases.
+There should also exist a chat component to it so that we can test the chat functionality from a mock application and ensure that things like queue persistence and chat storage and retrieval are working reliably with many users involved.
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## DEMOS
+#### ...COMING SOON
