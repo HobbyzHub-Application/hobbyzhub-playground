@@ -4,7 +4,10 @@ import App from "./App.vue";
 // import for TailwindCSS
 import "./style.css";
 
-// import for vuetify
+// import for Vuetify
 import vuetify from "./config/vuetify";
 
-createApp(App).use(vuetify).mount("#app");
+// import for Vue Router
+import router from "./config/router";
+
+createApp(App).use(vuetify, router).mount("#app");
