@@ -25,21 +25,29 @@
       <v-tabs
         v-model="tabs"
         fixed-tabs
-      >
+        class="font-abeezee">
         <v-tab value="followers">Followers & Followings</v-tab>
         <v-tab value="categories">Hobby Categories</v-tab>
         <v-tab value="chats">App Chats</v-tab>
       </v-tabs>
     </div>
     <div class="h-[92%] rounded-md shadow-lg p-2 border-[1px] border-primary">
-      <v-window v-model="tabs">
-        <v-window-item value="followers">
+      <v-window
+        v-model="tabs"
+        class="h-full">
+        <v-window-item
+          value="followers"
+          class="h-full">
           <FollowersView />
         </v-window-item>
-        <v-window-item value="categories">
+        <v-window-item
+          value="categories"
+          class="h-full">
           <CategoriesView />
         </v-window-item>
-        <v-window-item value="chats">
+        <v-window-item
+          value="chats"
+          class="h-full">
           <ChatsView />
         </v-window-item>
       </v-window>
