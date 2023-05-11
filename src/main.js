@@ -1,5 +1,12 @@
 import { createApp } from 'vue'
-import './style.css'
 import App from './App.vue'
 
-createApp(App).mount('#app')
+// import for TailwindCSS
+import './style.css'
+
+// import for vuetify
+import vuetify from './config/vuetify'
+
+createApp(App)
+.use(vuetify)
+.mount('#app')
