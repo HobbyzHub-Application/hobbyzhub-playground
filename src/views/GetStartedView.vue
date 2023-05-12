@@ -1,6 +1,7 @@
 <script lang="js">
   import { ref, watch } from 'vue';
   import useNotificationStore from '../stores/notification-store';
+  import { useRouter } from 'vue-router';
 
     export default {
       name: "GetStartedView",
@@ -19,6 +20,8 @@
           email: "",
           password: ""
         });
+
+        const router = useRouter();
 
         // watch inputs to enable or disable signup button
         watch([
@@ -50,9 +53,7 @@
             } else {
               setShowNotificationStateTrue("Successfully Signed You Up");
               signupSuccess.value = true;
-
             }
-
             return response.json();
           }).then((data) => {
             console.log(`Response Data: ${ data }`);
@@ -62,7 +63,8 @@
         }
 
         return {
-          signupLoading, newPasswordShow, signup, signupDetails, disableSignupButton, signupSuccess, setShowNotificationStateTrue
+          signupLoading, newPasswordShow, signup, signupDetails, disableSignupButton, signupSuccess,
+          setShowNotificationStateTrue
         }
       }
     }
@@ -70,7 +72,7 @@
 
 <template>
   <div class="h-full flex justify-center items-center">
-    <v-card class="w-[40%] h-[47%]">
+    <v-card class="w-[40%] h-[52%]">
       <v-card-title>Sign Up</v-card-title>
       <v-card-subtitle
         class="text-primary underline underline-offset-2 hover:cursor-pointer"
@@ -90,7 +92,7 @@
           :append-inner-icon="newPasswordShow ? 'mdi-eye' : 'mdi-eye-off'"
           @click:append-inner="newPasswordShow = !newPasswordShow"
           v-model="signupDetails.password"></v-text-field>
-        <div class="flex justify-center flex-col items-center">
+        <div class="flex justify-center flex-col items-center space-y-2">
           <v-btn
             color="success"
             variant="flat"
@@ -100,6 +102,14 @@
             class="w-[40%]">
             Signup
           </v-btn>
+          <div v-if="signupSuccess === true">
+            <v-btn
+              append-icon="mdi-arrow-right"
+              variant="text"
+              class="@hover:bg-transparent @hover:underline @hover:underline-offset-2">
+              Proceed
+            </v-btn>
+          </div>
         </div>
       </v-container>
     </v-card>
