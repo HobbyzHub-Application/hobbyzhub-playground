@@ -1,5 +1,6 @@
 <script lang="js">
   import { ref, watch } from 'vue';
+  import useNotificationStore from '../stores/notification-store';
 
     export default {
       name: "GetStartedView",
@@ -8,6 +9,10 @@
         const newPasswordShow = ref(false);
         const disableSignupButton = ref(true);
         const signupSuccess = ref(false);
+
+        // notification store logic
+        const notifStore = useNotificationStore();
+        const { setShowNotificationStateTrue } = notifStore;
 
         // signup details
         const signupDetails = ref({
@@ -37,12 +42,17 @@
             },
             body: JSON.stringify(signupDetails.value)
           }).then((response) => {
-            if(response.status !== 200) {
-              console.log("Error from signup response...");
-              signupLoading.value = false;
+            signupLoading.value = false;
+            if(response.status === 409) {
+              setShowNotificationStateTrue("Account With A Similar Email Already Exists");
+            } else if(response.status === 500) {
+              setShowNotificationStateTrue("Possible Error Signing You In, Please Try Again");
+            } else {
+              setShowNotificationStateTrue("Successfully Signed You Up");
+              signupSuccess.value = true;
+
             }
 
-            signupSuccess.value = true;
             return response.json();
           }).then((data) => {
             console.log(`Response Data: ${ data }`);
@@ -52,7 +62,7 @@
         }
 
         return {
-          signupLoading, newPasswordShow, signup, signupDetails, disableSignupButton, signupSuccess
+          signupLoading, newPasswordShow, signup, signupDetails, disableSignupButton, signupSuccess, setShowNotificationStateTrue
         }
       }
     }
