@@ -10,4 +10,9 @@ import vuetify from "./config/vuetify";
 // import for Vue Router
 import router from "./config/router";
 
-createApp(App).use(vuetify).use(router).mount("#app");
+//import for Pinia
+import { createPinia } from "pinia";
+
+const pinia = createPinia();
+
+createApp(App).use(vuetify).use(router).use(pinia).mount("#app");
