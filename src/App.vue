@@ -1,7 +1,11 @@
 <script lang="js">
+import NotificationComp from './components/NotificationComp.vue';
 
   export default {
     name: "App",
+    components: {
+      NotificationComp
+    },
     setup() {
 
     }
@@ -19,6 +23,9 @@
       </router-view>
     </div>
   </div>
+  <teleport to="#notification">
+    <NotificationComp />
+  </teleport>
 </template>
 
 <style>
