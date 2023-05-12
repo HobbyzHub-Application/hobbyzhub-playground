@@ -10,4 +10,4 @@ import vuetify from "./config/vuetify";
 // import for Vue Router
 import router from "./config/router";
 
-createApp(App).use(vuetify, router).mount("#app");
+createApp(App).use(vuetify).use(router).mount("#app");
