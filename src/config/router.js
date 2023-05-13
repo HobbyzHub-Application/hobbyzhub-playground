@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from "vue-router";
 import GetStartedView from "../views/GetStartedView.vue";
 import SignInView from "../views/SignInView.vue";
 import VerificationMailView from "../views/VerificationMailView.vue";
+import FinishSetupView from "../views/FinishSetupView.vue";
+import HobbyzhubPlayView from "../views/HobbyzhubPlayView.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -20,6 +22,16 @@ const router = createRouter({
       path: "/hobbyzhub-playground/mail-verification/",
       component: VerificationMailView,
       name: "MailVerification",
+    },
+    {
+      path: "/hobbyzhub-playground/finish-setup/",
+      component: FinishSetupView,
+      name: "FinishSetup",
+    },
+    {
+      path: "/hobbyzhub-playground/homepage/",
+      component: HobbyzhubPlayView,
+      name: "Homepage",
     },
   ],
 });
