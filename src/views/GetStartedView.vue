@@ -4,81 +4,81 @@
     import useCurrentUserStore from '../stores/currentuser-store';
     import { useRouter } from 'vue-router';
 
-      export default {
-        name: "GetStartedView",
-        setup() {
-          const signupLoading = ref(false);
-          const newPasswordShow = ref(false);
-          const disableSignupButton = ref(true);
-          const signupSuccess = ref(false);
+    export default {
+      name: "GetStartedView",
+      setup() {
+        const signupLoading = ref(false);
+        const newPasswordShow = ref(false);
+        const disableSignupButton = ref(true);
+        const signupSuccess = ref(false);
 
-          // notification store logic
-          const notifStore = useNotificationStore();
-          const { setShowNotificationStateTrue } = notifStore;
+        // notification store logic
+        const notifStore = useNotificationStore();
+        const { setShowNotificationStateTrue } = notifStore;
 
-          // signup details
-          const signupDetails = ref({
-            email: "",
-            password: ""
-          });
+        // signup details
+        const signupDetails = ref({
+          email: "",
+          password: ""
+        });
 
-          // router
-          const router = useRouter();
+        // router
+        const router = useRouter();
 
-          // current user store logic
-          const currentUserStore = useCurrentUserStore();
-          const { setUserEmail } = currentUserStore;
+        // current user store logic
+        const currentUserStore = useCurrentUserStore();
+        const { setUserEmail } = currentUserStore;
 
-          // watch inputs to enable or disable signup button
-          watch([
-            () => signupDetails.value.email,
-            () => signupDetails.value.password
-          ], (newValues) => {
-            if(newValues[0] !== "" && newValues[1] !== "") {
-              disableSignupButton.value = false;
+        // watch inputs to enable or disable signup button
+        watch([
+          () => signupDetails.value.email,
+          () => signupDetails.value.password
+        ], (newValues) => {
+          if (newValues[0] !== "" && newValues[1] !== "") {
+            disableSignupButton.value = false;
+          } else {
+            disableSignupButton.value = true;
+          }
+        });
+
+        function signup() {
+          signupLoading.value = true;
+          // code to signup the user with API an call
+          fetch("http://149.28.232.132:8765/accountmanagement-service/api/auth/register", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(signupDetails.value)
+          }).then((response) => {
+            signupLoading.value = false;
+            if (response.status === 409) {
+              setShowNotificationStateTrue("Account With A Similar Email Already Exists");
+              return null;
+            } else if (response.status === 500) {
+              setShowNotificationStateTrue("Possible Error Signing You Up. Please Try Again");
+              return null;
             } else {
-              disableSignupButton.value = true;
+              setShowNotificationStateTrue("Successfully Signed You Up");
+              setUserEmail(signupDetails.value.email);
+              signupSuccess.value = true;
+              return response.json();
+            }
+          }).then((data) => {
+            if (data !== null) {
+              console.log(`Response Data: ${data}`);
+              setUserEmail(signupDetails.value.email);
+              router.push({ name: "MailVerification" });
             }
           });
+        }
 
-          function signup() {
-            signupLoading.value = true;
-            // code to signup the user with API an call
-            fetch("http://149.28.232.132:8765/accountmanagement-service/api/auth/register", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify(signupDetails.value)
-            }).then((response) => {
-              signupLoading.value = false;
-              if(response.status === 409) {
-                setShowNotificationStateTrue("Account With A Similar Email Already Exists");
-                return null;
-              } else if(response.status === 500) {
-                setShowNotificationStateTrue("Possible Error Signing You Up. Please Try Again");
-                return null;
-              } else {
-                setShowNotificationStateTrue("Successfully Signed You Up");
-                setUserEmail(signupDetails.value.email);
-                signupSuccess.value = true;
-                return response.json();
-              }
-            }).then((data) => {
-              if(data !== null) {
-                console.log(`Response Data: ${ data }`);
-                setUserEmail(signupDetails.value.email);
-                router.push({ name: "MailVerification" });
-              }
-            })
-          }
-
-          return {
-            signupLoading, newPasswordShow, signup, signupDetails, disableSignupButton, signupSuccess,
-            setShowNotificationStateTrue
-          }
+        return {
+          signupLoading, newPasswordShow, signup, signupDetails, disableSignupButton, signupSuccess,
+          setShowNotificationStateTrue, router
         }
       }
+    }
 </script>
 
 <template>
@@ -87,6 +87,7 @@
             <v-card-title>Sign Up</v-card-title>
             <v-card-subtitle
                 class="text-primary underline underline-offset-2 hover:cursor-pointer"
+                @click="router.push({ name: 'SignIn' })"
                 >I Already Have An Account</v-card-subtitle
             >
             <v-container>
