@@ -9,7 +9,7 @@ const router = createRouter({
     {
       path: "/hobbyzhub-playground/",
       component: SignInView,
-      name: "GetStarted",
+      name: "SignIn",
     },
     {
       path: "/hobbyzhub-playground/get-started/",
