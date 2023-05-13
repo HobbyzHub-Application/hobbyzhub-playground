@@ -6,8 +6,9 @@ const useCurrentUserStore = defineStore("CurrentUserStore", () => {
     const currentUserData = reactive({
         userName: "",
         userEmail: "",
-        userToken: "",
+        userAccessToken: "",
         userProfilePicture: "",
+        userId: "",
     });
 
     // getters
@@ -22,10 +23,18 @@ const useCurrentUserStore = defineStore("CurrentUserStore", () => {
         currentUserData.userEmail = email;
     }
 
+    function populateUserDataAfterlogin(data) {
+        currentUserData.userName = data.userName;
+        currentUserData.userEmail = data.userEmail;
+        currentUserData.userAccessToken = data.accessToken;
+        currentUserData.userProfilePicture = data.userProfilePicLink;
+    }
+
     return {
         getCurrentUserEmail,
         setUserName,
         setUserEmail,
+        populateUserDataAfterlogin,
     };
 });
 
