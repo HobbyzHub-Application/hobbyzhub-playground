@@ -54,19 +54,23 @@
               signupLoading.value = false;
               if(response.status === 409) {
                 setShowNotificationStateTrue("Account With A Similar Email Already Exists");
+                return null;
               } else if(response.status === 500) {
-                setShowNotificationStateTrue("Possible Error Signing You In. Please Try Again");
+                setShowNotificationStateTrue("Possible Error Signing You Up. Please Try Again");
+                return null;
               } else {
                 setShowNotificationStateTrue("Successfully Signed You Up");
                 setUserEmail(signupDetails.value.email);
                 signupSuccess.value = true;
+                return response.json();
               }
-              return response.json();
             }).then((data) => {
-              console.log(`Response Data: ${ data }`);
-            }).catch((error) => {
-              console.log("Error occured: " + error);
-            });
+              if(data !== null) {
+                console.log(`Response Data: ${ data }`);
+                setUserEmail(signupDetails.value.email);
+                router.push({ name: "MailVerification" });
+              }
+            })
           }
 
           return {
