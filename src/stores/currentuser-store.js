@@ -5,7 +5,7 @@ const useCurrentUserStore = defineStore("CurrentUserStore", () => {
     // state
     const currentUserData = reactive({
         userName: "",
-        userEmail: "martbikathi@gmail.com",
+        userEmail: "",
         userToken: "",
         userProfilePicture: "",
     });
