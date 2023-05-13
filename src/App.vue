@@ -1,10 +1,11 @@
 <script lang="js">
 import NotificationComp from './components/NotificationComp.vue';
+import TopBarComp from './components/TopBarComp.vue';
 
   export default {
     name: "App",
     components: {
-      NotificationComp
+      NotificationComp, TopBarComp
     },
     setup() {
 
@@ -14,7 +15,7 @@ import NotificationComp from './components/NotificationComp.vue';
 
 <template>
   <div class="h-screen w-screen">
-    <div class="h-[8%] shadow-md"></div>
+    <TopBarComp />
     <div class="h-[92%] rounded-md shadow-lg p-2 border-[1px] border-primary">
       <router-view v-slot="{ Component }">
         <keep-alive>
