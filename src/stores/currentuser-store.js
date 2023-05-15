@@ -28,6 +28,15 @@ const useCurrentUserStore = defineStore("CurrentUserStore", () => {
         currentUserData.userEmail = data.userEmail;
         currentUserData.userAccessToken = data.accessToken;
         currentUserData.userProfilePicture = data.userProfilePicLink;
+        currentUserData.userId = data.userId;
+    }
+
+    function depopulateUserDataOnLogout() {
+        currentUserData.userName = "";
+        currentUserData.userEmail = "";
+        currentUserData.userAccessToken = "";
+        currentUserData.userProfilePicture = "";
+        currentUserData.userId = "";
     }
 
     return {
@@ -35,6 +44,7 @@ const useCurrentUserStore = defineStore("CurrentUserStore", () => {
         setUserName,
         setUserEmail,
         populateUserDataAfterlogin,
+        depopulateUserDataOnLogout
     };
 });
 
