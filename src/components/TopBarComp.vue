@@ -1,7 +1,7 @@
 <script lang="js">
     import { ref } from 'vue';
     import useCurrentUserStore from '../stores/currentuser-store';
-    import { useRouter } from 'vue-router';
+    import { useRouter, useRoute } from 'vue-router';
 
     export default {
         name: "TopBarComp",
@@ -9,21 +9,22 @@
             // current user store logic
             const currentUserStore = useCurrentUserStore();
             const { depopulateUserDataOnLogout } = currentUserStore;
-            const logoutLoading = ref(true);
+            const logoutLoading = ref(false);
 
             // router
             const router = useRouter();
+            const route = useRoute();
 
             function logoutUser() {
                 logoutLoading.value = true;
                 depopulateUserDataOnLogout();
                 logoutLoading.value = false;
 
-                router.push({ name: "GetStarted" });
+                router.push({ name: "SignIn" });
             }
 
             return {
-                depopulateUserDataOnLogout, logoutUser, logoutLoading
+                depopulateUserDataOnLogout, logoutUser, logoutLoading, route
             }
         }
     }
@@ -44,6 +45,7 @@
             variant="flat"
             @click="logoutUser"
             :loading="logoutLoading"
+            v-if="route.path.includes('/play/')"
             >Logout</v-btn
         >
     </div>
