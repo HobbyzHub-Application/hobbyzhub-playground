@@ -29,6 +29,10 @@ const useCurrentUserStore = defineStore("CurrentUserStore", () => {
     const getUserProfilePicture = computed(function getUserProfilePicture() {
         return currentUserData.userProfilePicture;
     });
+
+    const getUserAccessToken = computed(function getUserAccessToken() {
+        return currentUserData.userAccessToken;
+    });
     
 
     // setters
@@ -61,6 +65,7 @@ const useCurrentUserStore = defineStore("CurrentUserStore", () => {
         getUserFirstName,
         getUserSecondName,
         getUserProfilePicture,
+        getUserAccessToken,
         setUserName,
         setUserEmail,
         populateUserDataAfterlogin,
