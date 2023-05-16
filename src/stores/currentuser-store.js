@@ -14,6 +14,23 @@ const useCurrentUserStore = defineStore("CurrentUserStore", () => {
     // getters
     const getCurrentUserEmail = computed(() => currentUserData.userEmail);
 
+    const getUserFirstName = computed(function depopulateUserName() {
+        const fullName = currentUserData.userName; // e.g. "Martin Bikathi"
+
+        return fullName.split(" ")[0]; // return "Martin"
+    });
+
+    const getUserSecondName = computed(function depopulateUserName() {
+        const fullName = currentUserData.userName; // e.g. "Martin Bikathi"
+
+        return fullName.split(" ")[1]; // return "Bikathi"
+    });
+
+    const getUserProfilePicture = computed(function getUserProfilePicture() {
+        return currentUserData.userProfilePicture;
+    });
+    
+
     // setters
     function setUserName(username) {
         currentUserData.userName = username;
@@ -41,6 +58,9 @@ const useCurrentUserStore = defineStore("CurrentUserStore", () => {
 
     return {
         getCurrentUserEmail,
+        getUserFirstName,
+        getUserSecondName,
+        getUserProfilePicture,
         setUserName,
         setUserEmail,
         populateUserDataAfterlogin,
