@@ -24,12 +24,12 @@ const router = createRouter({
       name: "MailVerification",
     },
     {
-      path: "/hobbyzhub-playground/finish-setup/",
+      path: "/hobbyzhub-playground/play/finish-setup/",
       component: FinishSetupView,
       name: "FinishSetup",
     },
     {
-      path: "/hobbyzhub-playground/homepage/",
+      path: "/hobbyzhub-playground/play/homepage/",
       component: HobbyzhubPlayView,
       name: "Homepage",
     },
