@@ -12,3 +12,5 @@ There should also exist a chat component to it so that we can test the chat func
 
 ## DEMOS
 #### ...COMING SOON
+
+# PROJECT HAS BEEN ARCHIVED
